@@ -13,8 +13,6 @@ public class Main {
         // Comparing favorite numbers
         if (myfavnum == userfavnum) {
             System.out.println("Your favorite number is my favorite number🥳!!!");
-
-
         } else if (myfavnum < userfavnum) {
             System.out.println("Your favorite number is greater than my favorite number 7. 🥹");
         } else {
