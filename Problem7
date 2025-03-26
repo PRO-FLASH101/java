@@ -1,0 +1,15 @@
+import java.util.*;
+import java.io.*;
+
+public class Problem7 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] words = reader.readLine().split(" ");
+        
+        for(String s : words){
+            System.out.println(s);
+        }
+    }
+}
