@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "temp",
+            "request": "launch",
+            "mainClass": "temp",
+            "projectName": "JAVA ON VSCODE_ab8eb6a"
+        },
+        {
+            "type": "java",
+            "name": "Problem7",
+            "request": "launch",
+            "mainClass": "Problem7",
+            "projectName": "JAVA ON VSCODE_ab8eb6a"
+        },
+        {
+            "type": "java",
             "name": "crosswordsolver",
             "request": "launch",
             "mainClass": "crosswordsolver",

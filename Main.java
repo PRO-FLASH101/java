@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 public class Main {
     /* problem 7 helper
     public static void helper(ArrayList<String> matters){
@@ -98,76 +98,41 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        //user inputed number for triples 
+        // User input for the number
         int num = scan.nextInt();
 
-        //possible combos 
-        ArrayList<ArrayList<Integer>> possible = new ArrayList<>();        
+        // List to store factor triples
+        ArrayList<ArrayList<Integer>> triples = new ArrayList<>();        
+        int end = (int) Math.cbrt(num);  // Up to the cube root for efficient factorization
 
-        //Becuase ms.rahman said the header doesn't get confusing 
-        int end = (int) Math.sqrt(num);
-
-        // Adds possible combinations
+        // Generate factor triples
         for (int i = 1; i <= end; i++) {
-            ArrayList<Integer> inner = new ArrayList<>(); // Create a new inner list for each iteration
-            if (Math.pow(i, 2) == num) {
-                inner.add(i);
-                inner.add(i);
-                possible.add(inner); // Add the new inner list to possible
-            } else if (num % i == 0) {
-                inner.add(i);
-                inner.add(num / i);
-                possible.add(inner); // Add the new inner list to possible
-            }
-        }
-
-        //debug line (DELETE LATER!!!!!!!)
-        System.out.println(possible);
-
-        // Temporary list to store new elements
-        ArrayList<ArrayList<Integer>> newElements = new ArrayList<>();
-
-        for (int i = 0; i < possible.size(); i++) {
-            if (possible.get(i).get(0) == 1) { //fix this if statement 
-                // Create a new list for the 1 x 1 situation
-                ArrayList<Integer> newList = new ArrayList<>();
-                newList.add(1);
-                newList.add(1);
-                newList.add(possible.get(i).get(1));
-                newElements.add(newList); // Add to the temporary list
-            } else { //fix this else statement 
-                // If the first element is not 1, check if it can be divided by 3, 2, or 1
-                if (possible.get(i).get(1) % 3 == 0) {
-                    possible.get(i).add(possible.get(i).get(1) / 3);
-                    possible.get(i).set(1, 3);
-                } else if (possible.get(i).get(1) % 2 == 0) {
-                    possible.get(i).add(possible.get(i).get(1) / 2);
-                    possible.get(i).set(1, 2);
-                } else if (possible.get(i).get(1) % 1 == 0) {
-                    possible.get(i).add(possible.get(i).get(1));
-                    possible.get(i).set(1, 1);
+            if (num % i == 0) {
+                for (int j = i; j <= num / i; j++) {  // j starts from i to maintain ascending order
+                    if ((num / i) % j == 0) {
+                        int k = num / (i * j);  // k is the third factor
+                        if (j <= k) {  // Ensure ascending order
+                            ArrayList<Integer> triple = new ArrayList<>();
+                            triple.add(i);
+                            triple.add(j);
+                            triple.add(k);
+                            triples.add(triple);
+                        }
+                    }
                 }
             }
         }
 
-        // Add all new elements to the `possible` list after the loop
-        possible.addAll(newElements);
-        
-        // Sort each inner list in ascending order
-        for (ArrayList<Integer> i : possible) {
-            Collections.sort(i);
-        }
-
-        // Sort the outer list in descending order based on the first element of each inner list
-        possible.sort((list1, list2) -> list2.get(0) - list1.get(0));
-
-        // Output the answer
-        System.out.println(num + " has " + possible.size() + " factor triples:");
-        for (ArrayList<Integer> i : possible) {
-            for (int j : i) {
-                System.out.print(j + " ");
+        // Output the results
+        System.out.println(num + " has " + triples.size() + " factor triples:");
+        for (ArrayList<Integer> triple : triples) {
+            for (Integer n : triple) {
+                System.out.print(n + " ");
             }
             System.out.println();
+        }
+
+        scan.close();
         }
 
         /*problem 7 
@@ -352,8 +317,6 @@ public class Main {
             }
         }
 */
-        scan.close();
 
-
-    }
 }
+    
